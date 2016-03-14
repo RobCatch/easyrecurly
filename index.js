@@ -1,8 +1,8 @@
 var utility = require('./lib/utility'),
     client = require('./lib/client'),
     endpoints = require('./lib/endpoints'),
+    Js2Xml = require("./lib/js2xml"),
     xml2js = require('xml2js'),
-    Js2Xml = require("js2xml").Js2Xml,
     async = require('async'),
     extend = require('extend');
 
