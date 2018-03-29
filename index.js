@@ -176,6 +176,19 @@ var recurly = function(config) {
     }
   };
 
+  /* Doc: https://dev.recurly.com/docs/create-purchase */
+  this.purchases = {
+    create: function(obj, cb) {
+      clientObj.request(endpoints.purchases.create, new Js2Xml("purchase", obj).toString(), cb);
+    },
+    preview: function(obj, cb) {
+      clientObj.request(endpoints.purchases.preview, new Js2Xml("purchase", obj).toString(), cb);
+    },
+    authorize: function(obj, cb) {
+      clientObj.request(endpoints.purchases.authorize, new Js2Xml("purchase", obj).toString(), cb);
+    }
+  };
+
   /* Doc: https://docs.recurly.com/api/subscriptions */
   this.subscriptions = {
     list: function(cb, filter) {
