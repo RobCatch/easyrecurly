@@ -129,13 +129,19 @@ var recurly = function(config) {
     markFailed: function(invoiceNumber, cb) {
       clientObj.request(utility.addParams(endpoints.invoices.markFailed, {invoice_number: invoiceNumber}), cb);
     },
-    refund: function(invoiceNumber, cb) {
-      clientObj.request(utility.addParams(endpoints.invoices.refund, {invoice_number: invoiceNumber}), cb);
+    refund: function(invoiceNumber, obj, cb) {
+      if (typeof obj == 'function') {
+        cb = obj;
+        obj = { amount_in_cents: '' };
+      }
+      clientObj.request(utility.addParams(endpoints.invoices.refund, {invoice_number: invoiceNumber}), new Js2Xml("invoice", obj).toString(), cb);
     },
     offline: function(invoiceNumber, cb) {
       clientObj.request(utility.addParams(endpoints.invoices.offline, {invoice_number: invoiceNumber}), cb);
+    },
+    subscriptions: function (invoiceNumber, cb) {
+      clientObj.request(utility.addParams(endpoints.invoices.subscriptions, {invoice_number: invoiceNumber}), cb);
     }
-
   };
 
   /* Doc: https://docs.recurly.com/api/plans */
