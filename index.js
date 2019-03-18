@@ -1,8 +1,7 @@
 var utility = require('./lib/utility'),
     client = require('./lib/client'),
     endpoints = require('./lib/endpoints'),
-    js2xml = require("./lib/xml").js2xml,
-    extend = require('extend');
+    js2xml = require("./lib/xml").js2xml;
 
 var recurly = function(config) {
   var clientObj = new client(config);
@@ -43,7 +42,7 @@ var recurly = function(config) {
         filters = null;
       }
       var paramObj = {uuid: uuid};
-      if (filters) paramObj = extend(true, paramObj, filters);
+      if (filters) paramObj = Object.assign(paramObj, filters);
       return clientObj.request(utility.addParams(endpoints.adjustments.get, paramObj), cb);
     },
     create: async function(accountCode, obj, cb) {
